@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <svg width="215" height="1557" viewBox="0 0 215 1557" fill="none" preserveAspectRatio="xMidYMax meet" class="line-container">
+        <path d="M137 0.5V505C137.833 521 128 545 99 562C87.8333 570 63.6 589.2 56 602L23 637.5L19.5 570.5L61 607C75 621.333 110.9 647.5 142.5 637.5C160.833 631.833 200.3 615 211.5 593C199.333 578.333 167.4 550.8 137 558L142.5 690.5V1383.5C141.472 1390.7 137.442 1403.84 129.111 1405.5M125.5 1405.5C126.784 1405.74 127.986 1405.72 129.111 1405.5M129.111 1405.5C135.5 1410.5 140.646 1415.09 147.5 1420.5C157 1428 159 1420.5 169 1435C171 1446 165.5 1458.5 151 1455.5V1494V1521.5C150.333 1524.17 150.2 1530.1 155 1532.5C161 1535.5 175 1542.5 171 1554.5H138C135.5 1531 121.3 1483.7 84.5 1482.5C74 1494.17 59.3434 1515 59.3434 1525C59.3434 1537.35 55.177 1550.5 40.177 1552C31.0103 1554 12.7 1552.7 3.5 1521.5C5.66667 1510.17 16.5 1488.8 42.5 1494C50.3333 1485.17 59.4 1466.8 33 1464L51.5 1465.5C58.3434 1468.5 63.3434 1477.6 59.3434 1486C57.4386 1490 51.5 1501.5 56 1503.5" stroke="#CE5A5A" stroke-width="5"/>
+    </svg>
+    <section class="one">
+        <h1 class="scroll" data-rate=".4" data-direction="vertical">Hello Its Dhanashree</h1>
+    </section>
+    <section class="two">
+        <h1 class="scroll" data-rate=".2" data-direction="vertical">OMG Scroll</h1>
+        <p>big watermark</p>
+    </section>
+    <script>
+        let path=document.querySelector('path')
+        let pathLength=path.getTotalLength()
+        path.style.strokeDasharray=pathLength+' '+pathLength;
+        path.style.strokeDashoffset=pathLength;
+
+        window.addEventListener('scroll',()=>{
+            var scrollPercentage = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+            var drawLength = pathLength * scrollPercentage;
+            path.style.strokeDashoffset = pathLength - drawLength;
+            const target=document.querySelectorAll('.scroll');
+            var index=0,length=target.length;
+            for(index;index<length;index++){
+                var pos=window.pageYOffset*target[index].dataset.rate;
+                if (target[index].dataset.direction==='vertical'){
+                    target[index].style.transform='translate3d(0px,'+pos+'px, 0px)';
+
+                }else{
+                    var posX=window.pageYOffset*target[index].dataset.ratex;
+                    var posY=window.pageYOffset*target[index].dataset.ratey;
+                    target[index].style.transform='translate3d('+posX+'px,'+posY+'px, 0px)';
+                }
+            }
+        })
+        
+    </script>
+        
+</body>
+</html>
